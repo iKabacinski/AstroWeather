@@ -13,26 +13,12 @@
         android:layout_weight="1">
 
         <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ustawienia lokalizacji"
-            android:textAlignment="center"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-    </TableRow>
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
-
-        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Szerokość geograficzna"
-            android:textAlignment="viewStart"
-            android:textSize="24sp" />
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold" />
     </TableRow>
 
     <TableRow
@@ -45,7 +31,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="number" />
+            android:inputType="number"
+            android:text="0"
+            android:textSize="10sp" />
     </TableRow>
 
     <TableRow
@@ -60,12 +48,6 @@
             android:layout_weight="1"
             android:text="ustaw" />
 
-        <Button
-            android:id="@+id/ustawSzerokoscGps"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="ustaw z GPS" />
     </TableRow>
 
     <TableRow
@@ -77,7 +59,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Dlugość geograficzna"
-            android:textSize="24sp" />
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold" />
     </TableRow>
 
     <TableRow
@@ -90,7 +74,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="number" />
+            android:inputType="number"
+            android:text="0"
+            android:textSize="10sp" />
     </TableRow>
 
     <TableRow
@@ -105,12 +91,6 @@
             android:layout_weight="1"
             android:text="Ustaw" />
 
-        <Button
-            android:id="@+id/ustawDlugoscGps"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="ustaw z GPS" />
     </TableRow>
 
     <TableRow
@@ -121,9 +101,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Częstotliwość odświeżania danych"
+            android:text="Częstotliwość odświeżania danych w minutach"
             android:textAlignment="center"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
     </TableRow>
 
@@ -138,4 +118,5 @@
             android:layout_height="wrap_content"
             android:spinnerMode="dialog" />
     </TableRow>
+
 </LinearLayout>

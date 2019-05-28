@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MoonFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Księżyc"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/wschodKsiezyca"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Wschód księżyca:" />
+
+    <TextView
+        android:id="@+id/zachodKsiezyca"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Zachód księżyca:" />
+
+    <TextView
+        android:id="@+id/pelniaKsiezyc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Najbliższa pełnia:" />
+
+    <TextView
+        android:id="@+id/nowKsiezyca"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Najbliższa nów:" />
+
+    <TextView
+        android:id="@+id/fazaKsiezyca"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Faza księżyca" />
+
+    <TextView
+        android:id="@+id/dzienMiesiacaSynodycznego"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dzień miesiąca synodycznego:" />
+</LinearLayout>

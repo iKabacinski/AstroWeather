@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SunFragment">
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Słońce"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/wschodSlonce"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Wschód:" />
+
+    <TextView
+        android:id="@+id/azymutWschoduSlonca"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Azymut wschodu słońca:  " />
+
+    <TextView
+        android:id="@+id/zachodSlonce"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Zachód:" />
+
+    <TextView
+        android:id="@+id/azymutZachoduSlonca"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Azymut zachodu słońca" />
+
+    <TextView
+        android:id="@+id/zmierzchSlonce"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Zmierzch:" />
+
+    <TextView
+        android:id="@+id/switSlonce"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Świt cywilny:" />
+</LinearLayout>
