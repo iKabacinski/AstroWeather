@@ -1,6 +1,7 @@
 package com.example.astroweather;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,114 +9,140 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.astrocalculator.AstroCalculator;
 import com.astrocalculator.AstroDateTime;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Objects;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link MoonFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link MoonFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class MoonFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+
+    private static final int minuteInMillisecconds = 60000;
+    TextView wschodKsiezyca;
+    TextView zachodKsiezyca;
+    TextView najblizszaPelnia;
+    TextView najblizszaNow;
+    TextView fazaKsiezyca;
+    TextView dzienMiesiacaSynodycznego;
+
+    private int refreshTime;
+
+    private Date date;
+    private DateFormat yearFormat;
+    private DateFormat monthFormat;
+    private DateFormat dayFormat;
+    private DateFormat hourFormat;
+    private DateFormat minuteFormat;
+    private DateFormat secondsFormat;
+
+    private Thread thread;
+
+    private SharedPreferences sharedPreferences;
 
     private AstroDateTime astroDateTime;
     private AstroCalculator astroCalculator;
+    private AstroCalculator.Location location;
 
-    private OnFragmentInteractionListener mListener;
 
-    public MoonFragment() {
-        // Required empty public constructor
-    }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MoonFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MoonFragment newInstance(String param1, String param2) {
-        MoonFragment fragment = new MoonFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+
+
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-
-        }
-        astroDateTime = new AstroDateTime();
-        astroCalculator = new AstroCalculator(astroDateTime,new AstroCalculator.Location(0,0));
-
-
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+    public View onCreateView(LayoutInflater inflater,  ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_moon, container, false);
+        // In
+        //
+        // flate the layout for this fragment
+        View view =inflater.inflate(R.layout.fragment_moon, container, false);
+
+        wschodKsiezyca = view.findViewById(R.id.wschodKsiezycaaaa);
+        zachodKsiezyca = view.findViewById(R.id.zachodKsiezyca);
+        najblizszaPelnia = view.findViewById(R.id.pelniaKsiezyc);
+        najblizszaNow = view.findViewById(R.id.nowKsiezyca);
+        fazaKsiezyca = view.findViewById(R.id.fazaKsiezyca);
+        dzienMiesiacaSynodycznego = view.findViewById(R.id.dzienMiesiacaSynodycznego);
+
+        date = new Date();
+        yearFormat = new SimpleDateFormat("yyyy");
+        monthFormat = new SimpleDateFormat("mm");
+        dayFormat = new SimpleDateFormat("dd");
+        hourFormat = new SimpleDateFormat("hh");
+        minuteFormat = new SimpleDateFormat("mm");
+        secondsFormat = new SimpleDateFormat("ss");
+
+        sharedPreferences =getActivity().getSharedPreferences("ustawienia",0);
+        setAstroDateTime();
+        setData();
+
+        return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+    private void setData() {
+        wschodKsiezyca.setText(wschodKsiezyca.getText() +String.valueOf(astroCalculator.getMoonInfo().getMoonrise().toString()));
+        zachodKsiezyca.setText(zachodKsiezyca.getText() + String.valueOf(astroCalculator.getMoonInfo().getMoonset().toString()));
+        najblizszaPelnia.setText(najblizszaPelnia.getText() + String.valueOf(astroCalculator.getMoonInfo().getNextFullMoon().toString()));
+        najblizszaNow.setText(najblizszaNow.getText() + String.valueOf(astroCalculator.getMoonInfo().getNextNewMoon().toString()));
+        fazaKsiezyca.setText(fazaKsiezyca.getText() + String.valueOf(astroCalculator.getMoonInfo().getIllumination()) + "%");
+        dzienMiesiacaSynodycznego.setText(dzienMiesiacaSynodycznego.getText() + String.valueOf(astroCalculator.getMoonInfo().getAge()));
     }
-    // @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-//    }
-//
+
+    private void setAstroDateTime() {
+
+        astroDateTime = new AstroDateTime(Integer.valueOf(yearFormat.format(date)), Integer.valueOf(monthFormat.format(date)), Integer.valueOf(dayFormat.format(date)), Integer.valueOf(hourFormat.format(date)), Integer.valueOf(minuteFormat.format(date)), Integer.valueOf(secondsFormat.format(date)), 2, false);
+
+        double szerokosc = Double.parseDouble(sharedPreferences.getString("szerokoscOdczytana", "0"));
+        double dlugosc = Double.parseDouble(sharedPreferences.getString("dlugoscOdczytana", "0"));
+
+        location = new AstroCalculator.Location(szerokosc, dlugosc);
+
+        astroCalculator = new AstroCalculator(astroDateTime, location);
+
+        refreshTime = sharedPreferences.getInt("odswiezanieOdczytane",1);
+
+    }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
+    public void onStart() {
+        super.onStart();
+        thread = new Thread() {
+            @Override
+            public void run() {
+                runThread(refreshTime);
+            }
+        };
+        thread.start();
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+    private void runThread(int refreshTime) {
+        try {
+
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setAstroDateTime();
+                    setData();
+                }
+
+            });
+            Thread.sleep(minuteInMillisecconds * refreshTime);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        thread.interrupt();
     }
 }

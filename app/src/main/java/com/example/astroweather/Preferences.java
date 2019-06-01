@@ -43,7 +43,7 @@ public class Preferences extends AppCompatActivity implements View.OnClickListen
         spinner.setAdapter(spinnerAdapter);
 
 
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences sharedPreferences = getSharedPreferences("ustawienia",0);
 
         szerokoscOdczytana = sharedPreferences.getString("szerokoscOdczytana", "0");
         dlugoscOdczytana = sharedPreferences.getString("dlugoscOdczytana", "0");
@@ -71,7 +71,7 @@ public class Preferences extends AppCompatActivity implements View.OnClickListen
                     if (dlugosc < 0)
                         dlugosc = Math.abs(dlugosc);
 
-                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+                    SharedPreferences preferences = getSharedPreferences("ustawienia",0);
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.putString("dlugoscOdczytana", dlugosc.toString());
                     editor.apply();
@@ -87,7 +87,7 @@ public class Preferences extends AppCompatActivity implements View.OnClickListen
                 }
 //                odswiezanieOdczytane = Integer.parseInt(spinner.getSelectedItem().toString().substring(0, 2));
 
-                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+                SharedPreferences preferences = getSharedPreferences("ustawienia",0);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString("szerokoscOdczytana", szerokosc.toString());
                 editor.apply();
@@ -101,10 +101,11 @@ public class Preferences extends AppCompatActivity implements View.OnClickListen
         }
         odswiezanieOdczytane = Integer.parseInt(spinner.getSelectedItem().toString());
 
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences preferences = getSharedPreferences("ustawienia",0);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt("odswiezanieOdczytane",odswiezanieOdczytane);
         editor.apply();
+        editor.commit();
 
     }
 
