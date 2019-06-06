@@ -84,13 +84,13 @@ public class SunFragment extends Fragment {
 
     private void setData() {
         wschodSlonca.setText("Wschód Słońca: " + String.valueOf(astroCalculator.getSunInfo().getSunrise().toString()));
-        azymutWschoduSlonca.setText("Azymut wschodu Słońca: " + String.valueOf(round(astroCalculator.getSunInfo().getAzimuthRise())));
+        azymutWschoduSlonca.setText("Azymut wschodu Słońca: " + String.format("%.2f", (astroCalculator.getSunInfo().getAzimuthRise())));
         zachodSlonca.setText("Zachód Słońca: " + String.valueOf(astroCalculator.getSunInfo().getSunset()));
-        azymutZachoduSlonca.setText("Azymut zachodu Słońca: " + String.valueOf(round(astroCalculator.getSunInfo().getAzimuthSet())));
+        azymutZachoduSlonca.setText("Azymut zachodu Słońca: " + String.format("%.2f", (astroCalculator.getSunInfo().getAzimuthSet())));
         zmierzchSlonca.setText("Zmierzch Słońca: " + String.valueOf(astroCalculator.getSunInfo().getTwilightEvening()));
         switCywilny.setText("Świt cywilny: " + String.valueOf(astroCalculator.getSunInfo().getTwilightMorning()));
-        Toast.makeText(context, "Nowe dane",
-                Toast.LENGTH_SHORT).show();
+//        Toast.makeText(context, "Nowe dane",
+//                Toast.LENGTH_SHORT).show();
     }
 
     private void setAstroDateTime() {
@@ -118,6 +118,9 @@ public class SunFragment extends Fragment {
             @Override
             public void run() {
                 runThread(refreshTime);
+
+                Toast.makeText(context, "Nowe dane",
+                        Toast.LENGTH_SHORT).show();
             }
         };
         thread.start();
@@ -125,20 +128,28 @@ public class SunFragment extends Fragment {
 
     private void runThread(int refreshTime) {
         while (true) {
+
             //context=getActivity();
-            try {
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
+            if (getActivity() != null) {
+                try {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
 
-                        setAstroDateTime();
-                        setData();
-                    }
+                            setAstroDateTime();
+                            setData();
+//                            Toast.makeText(context, "Nowe dane",
+//                                    Toast.LENGTH_SHORT).show();
 
-                });
-                Thread.sleep(minuteInMillisecconds * refreshTime);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                        }
+
+                    });
+                    Thread.sleep(minuteInMillisecconds * refreshTime);
+//                    Toast.makeText(context, "Nowe dane",
+//                            Toast.LENGTH_SHORT).show();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
 
         }

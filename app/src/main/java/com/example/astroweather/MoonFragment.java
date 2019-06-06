@@ -84,16 +84,12 @@ public class MoonFragment extends Fragment {
     }
 
     private void setData() {
-        wschodKsiezyca.setText("Wschód Księżyca: " + String.valueOf(astroCalculator.getMoonInfo().getMoonrise().toString()));
-        zachodKsiezyca.setText("Zachód Księżyca: " + String.valueOf(astroCalculator.getMoonInfo().getMoonset().toString()));
+        wschodKsiezyca.setText("Wschód Księżyca: " + String.format(astroCalculator.getMoonInfo().getMoonrise().toString()));
+        zachodKsiezyca.setText("Zachód Księżyca: " + String.format(astroCalculator.getMoonInfo().getMoonset().toString()));
         najblizszaPelnia.setText("Najbliższa pełnia Księżyca: " + String.valueOf(astroCalculator.getMoonInfo().getNextFullMoon().toString()));
         najblizszaNow.setText("Najbliższa Nów Księżyca: " + String.valueOf(astroCalculator.getMoonInfo().getNextNewMoon().toString()));
-        fazaKsiezyca.setText("Faza Księżyca: " + String.valueOf(round(astroCalculator.getMoonInfo().getIllumination() * 100)) + " %");
-        dzienMiesiacaSynodycznego.setText("Dzień miesiąca synodycznego: " + String.valueOf(round(astroCalculator.getMoonInfo().getAge()/29.531)));
-
-
-//        Toast.makeText(context, "Odswiezono dane",
-//                Toast.LENGTH_SHORT).show();
+        fazaKsiezyca.setText("Faza Księżyca: " + String.format("%.2f", (astroCalculator.getMoonInfo().getIllumination() * 100)) + " %");
+        dzienMiesiacaSynodycznego.setText("Dzień miesiąca synodycznego: " + String.format("%.2f", (astroCalculator.getMoonInfo().getAge() / 29.531)));
 
     }
 
@@ -121,6 +117,8 @@ public class MoonFragment extends Fragment {
             @Override
             public void run() {
                 runThread(refreshTime);
+                Toast.makeText(getActivity(), "Nowe dane",
+                        Toast.LENGTH_SHORT).show();
             }
         };
         thread.start();
@@ -129,20 +127,25 @@ public class MoonFragment extends Fragment {
     private void runThread(int refreshTime) {
         while (true) {
             try {
+                if (getActivity() != null) {
+//                    Toast.makeText(getActivity(), "Nowe dane",
+//                            Toast.LENGTH_SHORT).show();
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
 
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        setAstroDateTime();
-                        setData();
-//                        Toast.makeText(getActivity(), "Odswiezono dane",
+                            setAstroDateTime();
+                            setData();
+//                        Toast.makeText(getActivity(), "Nowe dane",
 //                                Toast.LENGTH_SHORT).show();
 
-                    }
+                        }
 
-                });
+                    });
+                }
                 Thread.sleep(minuteInMillisecconds * refreshTime);
+//                Toast.makeText(getActivity(), "Nowe dane",
+//                        Toast.LENGTH_SHORT).show();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
