@@ -31,21 +31,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="number" />
-    </TableRow>
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
-
-        <Button
-            android:id="@+id/ustawSzerokosc"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="ustaw" />
-
+            android:inputType="number|numberDecimal"
+            android:text="0" />
     </TableRow>
 
     <TableRow
@@ -72,7 +59,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="number" />
+            android:inputType="number|numberDecimal"
+            android:text="0" />
     </TableRow>
 
     <TableRow
@@ -81,11 +69,11 @@
         android:layout_weight="1">
 
         <Button
-            android:id="@+id/ustawDlugosc"
+            android:id="@+id/ustawLokalizacje"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Ustaw" />
+            android:text="Ustaw lokalizacje" />
 
     </TableRow>
 
@@ -113,6 +101,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:spinnerMode="dialog" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/ustawCzasOdswiezania"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ustaw czas odświeżania" />
     </TableRow>
 
 </LinearLayout>

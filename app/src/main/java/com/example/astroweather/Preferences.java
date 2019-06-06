@@ -1,7 +1,7 @@
 package com.example.astroweather;
 
+import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,12 +14,14 @@ public class Preferences extends AppCompatActivity implements View.OnClickListen
     private Spinner spinner;
 
     private EditText szerokoscText, dlugoscText;
-    private Button ustawDlugoscButton, ustawSzerokoscButton;
+    private Button ustawLokalizacjeButton, ustawCzasOdswiezaniaButton;
 
     private String szerokoscOdczytana, dlugoscOdczytana;
 
-    public int odswiezanieOdczytane=1;
+    public int odswiezanieOdczytane = 1;
     private Double dlugosc, szerokosc;
+    private Context context;
+    private SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,29 +35,17 @@ public class Preferences extends AppCompatActivity implements View.OnClickListen
         dlugoscText = findViewById(R.id.dlugosc);
         dlugoscText.setOnClickListener(this);
 
-        ustawDlugoscButton = findViewById(R.id.ustawDlugosc);
-        ustawDlugoscButton.setOnClickListener(this);
-        ustawSzerokoscButton = findViewById(R.id.ustawSzerokosc);
-        ustawSzerokoscButton.setOnClickListener(this);
+        ustawLokalizacjeButton = findViewById(R.id.ustawLokalizacje);
+        ustawLokalizacjeButton.setOnClickListener(this);
+        ustawCzasOdswiezaniaButton = findViewById(R.id.ustawCzasOdswiezania);
+        ustawCzasOdswiezaniaButton.setOnClickListener(this);
 
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.refresh_array, android.R.layout.simple_spinner_item);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinnerAdapter);
 
 
-        SharedPreferences sharedPreferences = getSharedPreferences("ustawienia",0);
 
-        szerokoscOdczytana = sharedPreferences.getString("szerokoscOdczytana", "0");
-        dlugoscOdczytana = sharedPreferences.getString("dlugoscOdczytana", "0");
-        odswiezanieOdczytane = sharedPreferences.getInt("odswiezanieOdczytane", 1);
-        if (savedInstanceState != null) {
-            szerokoscText.setText(savedInstanceState.getString("szerokoscOdczytana"));
-            dlugoscText.setText(savedInstanceState.getString("dlugoscOdczytana"));
-        } else {
-            setCzasOdswiezania(odswiezanieOdczytane);
-            szerokoscText.setText(szerokoscOdczytana);
-            dlugoscText.setText(dlugoscOdczytana);
-        }
 
     }
 
@@ -63,49 +53,42 @@ public class Preferences extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.ustawDlugosc:
+            case R.id.ustawLokalizacje:
                 if (dlugoscText.getText().toString().equals("") || dlugoscText.getText().toString().equals(""))
                     dlugosc = 0.0;
                 else {
                     dlugosc = Double.parseDouble(dlugoscText.getText().toString());
                     if (dlugosc < 0)
                         dlugosc = Math.abs(dlugosc);
+                    if (szerokoscText.getText().toString().equals("") || szerokoscText.getText().toString().equals("")) {
+                        szerokosc = 0.0;
+                    } else {
+                        szerokosc = Double.parseDouble(szerokoscText.getText().toString());
+                        if (szerokosc < 0)
+                            szerokosc = Math.abs(szerokosc);
+                    }
 
-                    SharedPreferences preferences = getSharedPreferences("ustawienia",0);
+
+                    context = getApplication();
+                    preferences = context.getSharedPreferences(
+                            getString(R.string.preference_file_key), Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("szerokoscOdczytana", szerokosc.toString());
                     editor.putString("dlugoscOdczytana", dlugosc.toString());
-                    editor.apply();
+                  editor.apply();
                 }
                 break;
-            case R.id.ustawSzerokosc:
-                if (szerokoscText.getText().toString().equals("") || szerokoscText.getText().toString().equals("")) {
-                    szerokosc = 0.0;
-                } else {
-                    szerokosc = Double.parseDouble(szerokoscText.getText().toString());
-                    if (szerokosc < 0)
-                        szerokosc = Math.abs(szerokosc);
-                }
-//                odswiezanieOdczytane = Integer.parseInt(spinner.getSelectedItem().toString().substring(0, 2));
+            case R.id.ustawCzasOdswiezania:
 
-                SharedPreferences preferences = getSharedPreferences("ustawienia",0);
+                odswiezanieOdczytane = Integer.parseInt(spinner.getSelectedItem().toString());
+                context = getApplication();
+                preferences = context.getSharedPreferences(
+                        getString(R.string.preference_file_key), Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
-                editor.putString("szerokoscOdczytana", szerokosc.toString());
+                editor.putInt("odswiezanieOdczytane", odswiezanieOdczytane);
                 editor.apply();
-
                 break;
-
-          //  editor.putInt("czasOdczyt",czas);
-
-
-
         }
-        odswiezanieOdczytane = Integer.parseInt(spinner.getSelectedItem().toString());
-
-        SharedPreferences preferences = getSharedPreferences("ustawienia",0);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("odswiezanieOdczytane",odswiezanieOdczytane);
-        editor.apply();
-        editor.commit();
 
     }
 

@@ -18,7 +18,7 @@
         android:id="@+id/wschodSlonce"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Wschód:" />
+        android:text="Wschód: " />
 
     <TextView
         android:id="@+id/azymutWschoduSlonca"
@@ -30,19 +30,19 @@
         android:id="@+id/zachodSlonce"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Zachód:" />
+        android:text="Zachód: " />
 
     <TextView
         android:id="@+id/azymutZachoduSlonca"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Azymut zachodu słońca" />
+        android:text="Azymut zachodu słońca: " />
 
     <TextView
         android:id="@+id/zmierzchSlonce"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Zmierzch:" />
+        android:text="Zmierzch: " />
 
     <TextView
         android:id="@+id/switSlonce"

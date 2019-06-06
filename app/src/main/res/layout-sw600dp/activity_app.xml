@@ -29,10 +29,30 @@
         android:layout_height="wrap_content"
         android:text="Długość geograficzna: " />
 
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <fragment
+            android:id="@+id/fragment3"
+            android:name="com.example.astroweather.SunFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <fragment
+            android:id="@+id/fragment4"
+            android:name="com.example.astroweather.MoonFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+    </TableRow>
+
     <android.support.v4.view.ViewPager
         android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1" />
+        android:layout_weight="0"
+        android:visibility="invisible" />
 
 </LinearLayout>

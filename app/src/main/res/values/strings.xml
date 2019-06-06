@@ -3,6 +3,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="preference_file_key">ustawienia</string>
 
     <string-array name="refresh_array">
         <item name="1 min">1</item>
