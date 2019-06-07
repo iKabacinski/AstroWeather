@@ -20,6 +20,7 @@ public class App extends AppCompatActivity {
 
     private TextView szerokoscGeograficzna;
     private TextView dlugoscGeograficzna;
+    private TextView czasOdswiezania;
     private SharedPreferences preferences;
     private Context context;
 
@@ -29,7 +30,7 @@ public class App extends AppCompatActivity {
         setContentView(R.layout.activity_app);
         context = getApplicationContext();
 
-        viewPager = (ViewPager) findViewById(R.id.fragmentContainer);
+        viewPager =  findViewById(R.id.fragmentContainer);
 
         adapter = new FragmentAdapter(getSupportFragmentManager());
 
@@ -38,12 +39,12 @@ public class App extends AppCompatActivity {
 
         szerokoscGeograficzna = findViewById(R.id.szerokoscGeograficzna);
         dlugoscGeograficzna = findViewById(R.id.dlugośćGeograficzna);
-
+        czasOdswiezania = findViewById(R.id.czasOdswiezania);
         preferences = getApplication().getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        szerokoscGeograficzna.setText(szerokoscGeograficzna.getText() + preferences.getString("szerokoscOdczytana", "0"));
-        dlugoscGeograficzna.setText(dlugoscGeograficzna.getText() + preferences.getString("dlugoscOdczytana", "0"));
-
+        szerokoscGeograficzna.setText(szerokoscGeograficzna.getText() + preferences.getString("szerokoscOdczytana", "51.45"));
+        dlugoscGeograficzna.setText(dlugoscGeograficzna.getText() + preferences.getString("dlugoscOdczytana", "19.28"));
+        czasOdswiezania.setText("Czas odświeżania: "+preferences.getInt("odswiezanieOdczytane",1)+ " min");
 
     }
 

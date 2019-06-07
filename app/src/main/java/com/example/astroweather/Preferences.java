@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class Preferences extends AppCompatActivity implements View.OnClickListener {
     private Spinner spinner;
@@ -45,79 +46,61 @@ public class Preferences extends AppCompatActivity implements View.OnClickListen
         spinner.setAdapter(spinnerAdapter);
 
 
-
-
     }
 
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.ustawLokalizacje:
-                if (dlugoscText.getText().toString().equals("") || dlugoscText.getText().toString().equals(""))
-                    dlugosc = 0.0;
-                else {
-                    dlugosc = Double.parseDouble(dlugoscText.getText().toString());
-                    if (dlugosc < 0)
-                        dlugosc = Math.abs(dlugosc);
-                    if (szerokoscText.getText().toString().equals("") || szerokoscText.getText().toString().equals("")) {
-                        szerokosc = 0.0;
-                    } else {
-                        szerokosc = Double.parseDouble(szerokoscText.getText().toString());
-                        if (szerokosc < 0)
-                            szerokosc = Math.abs(szerokosc);
-                    }
-
-
-                    context = getApplication();
-                    preferences = context.getSharedPreferences(
-                            getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("szerokoscOdczytana", szerokosc.toString());
-                    editor.putString("dlugoscOdczytana", dlugosc.toString());
-                  editor.apply();
+            case R.id.ustawLokalizacje: {
+                if (dlugoscText.getText().toString().equals("") || dlugoscText.getText().toString().equals("") || dlugoscText.getText().toString().isEmpty()) {
+                    dlugosc = 19.28;
+                    Toast.makeText(getApplicationContext(), "ZŁA DŁUGOSC,Ustawiam domyslna", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (Double.parseDouble(dlugoscText.getText().toString()) < -180 || Double.parseDouble(dlugoscText.getText().toString()) > 180 || dlugoscText.getText().toString().isEmpty()) {
+                        Toast.makeText(getApplicationContext(), "ZŁA DŁUGOSC,Ustawiam domyslna", Toast.LENGTH_SHORT).show();
+                        dlugosc = 19.28;
+                    } else
+                        dlugosc = Double.parseDouble(dlugoscText.getText().toString());
                 }
-                break;
-            case R.id.ustawCzasOdswiezania:
+            }
+            if (szerokoscText.getText().toString().equals("") || szerokoscText.getText().toString().equals("") || szerokoscText.getText().toString().isEmpty()) {
+                szerokosc = 51.45;
+                Toast.makeText(getApplicationContext(), "ZŁA SZEROKOSC,Ustawiam domyslna", Toast.LENGTH_SHORT).show();
+            } else {
+                if (Double.parseDouble(szerokoscText.getText().toString()) < -90 || Double.parseDouble(szerokoscText.getText().toString()) > 90 || szerokoscText.getText().toString().isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "ZŁA SZEROKOSC,Ustawiam domyslna", Toast.LENGTH_SHORT).show();
+                    szerokosc = 51.45;
+                } else {
 
-                odswiezanieOdczytane = Integer.parseInt(spinner.getSelectedItem().toString());
-                context = getApplication();
-                preferences = context.getSharedPreferences(
-                        getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putInt("odswiezanieOdczytane", odswiezanieOdczytane);
-                editor.apply();
-                break;
-        }
+                    szerokosc = Double.parseDouble(szerokoscText.getText().toString());
+                }
+            }
 
+
+            context = getApplication();
+            preferences = context.getSharedPreferences(
+                    getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("szerokoscOdczytana", szerokosc.toString());
+            editor.putString("dlugoscOdczytana", dlugosc.toString());
+            editor.apply();
+
+        break;
+
+        case R.id.ustawCzasOdswiezania:
+
+        odswiezanieOdczytane = Integer.parseInt(spinner.getSelectedItem().toString());
+        context = getApplication();
+        preferences = context.getSharedPreferences(
+                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+       editor = preferences.edit();
+        editor.putInt("odswiezanieOdczytane", odswiezanieOdczytane);
+        editor.apply();
+        break;
     }
 
-    public void setCzasOdswiezania(int odswiezanieOdczytane) {
-
-        switch (odswiezanieOdczytane) {
-            case 1:
-                spinner.setSelection(0);
-                break;
-            case 2:
-                spinner.setSelection(1);
-                break;
-            case 3:
-                spinner.setSelection(2);
-                break;
-            case 4:
-                spinner.setSelection(3);
-                break;
-            case 5:
-                spinner.setSelection(4);
-                break;
-            default:
-                spinner.setSelection(5);
-                break;
-
-        }
-
-
-    }
+}
 
 }
 

@@ -12,41 +12,48 @@
         android:layout_height="wrap_content"
         android:text="Słońce"
         android:textAlignment="center"
+        android:textColor="@android:color/holo_orange_dark"
         android:textSize="20sp" />
 
     <TextView
         android:id="@+id/wschodSlonce"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Wschód: " />
+        android:text="Wschód: "
+        android:textColor="@android:color/holo_red_dark" />
 
     <TextView
         android:id="@+id/azymutWschoduSlonca"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Azymut wschodu słońca:  " />
+        android:text="Azymut wschodu słońca:  "
+        android:textColor="@android:color/holo_red_dark" />
 
     <TextView
         android:id="@+id/zachodSlonce"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Zachód: " />
+        android:text="Zachód: "
+        android:textColor="@android:color/holo_red_dark" />
 
     <TextView
         android:id="@+id/azymutZachoduSlonca"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Azymut zachodu słońca: " />
+        android:text="Azymut zachodu słońca: "
+        android:textColor="@android:color/holo_red_dark" />
 
     <TextView
         android:id="@+id/zmierzchSlonce"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Zmierzch: " />
+        android:text="Zmierzch: "
+        android:textColor="@android:color/holo_red_dark" />
 
     <TextView
         android:id="@+id/switSlonce"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Świt cywilny:" />
+        android:text="Świt cywilny:"
+        android:textColor="@android:color/holo_red_dark" />
 </LinearLayout>

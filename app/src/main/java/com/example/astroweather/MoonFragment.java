@@ -55,9 +55,6 @@ public class MoonFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        // In
-        //Context context = getActivity();
-        // flate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_moon, container, false);
         context = getActivity();
         wschodKsiezyca = view.findViewById(R.id.wschodKsiezycaaaa);
@@ -89,18 +86,34 @@ public class MoonFragment extends Fragment {
         najblizszaPelnia.setText("Najbliższa pełnia Księżyca: " + String.valueOf(astroCalculator.getMoonInfo().getNextFullMoon().toString()));
         najblizszaNow.setText("Najbliższa Nów Księżyca: " + String.valueOf(astroCalculator.getMoonInfo().getNextNewMoon().toString()));
         fazaKsiezyca.setText("Faza Księżyca: " + String.format("%.2f", (astroCalculator.getMoonInfo().getIllumination() * 100)) + " %");
-        dzienMiesiacaSynodycznego.setText("Dzień miesiąca synodycznego: " + String.format("%.2f", (astroCalculator.getMoonInfo().getAge() / 29.531)));
+        dzienMiesiacaSynodycznego.setText("Wiek księżyca " + String.format("%.2f", (astroCalculator.getMoonInfo().getAge())));
 
     }
+
+//    private String getLunarDay() {
+//        AstroDateTime nextMoon = astroCalculator.getMoonInfo().getNextNewMoon();
+//        Date lastNextMoonDate = new Date(nextMoon.getYear(),
+//                nextMoon.getMonth(),
+//                nextMoon.getDay(),
+//                nextMoon.getHour(),
+//                nextMoon.getMinute(),
+//                nextMoon.getSecond());
+//        double diff = (lastNextMoonDate.getTime() - date.getTime()) * 60000;
+//        double lunarDay = diff / 60.0 / 24 % 29.531;
+//        if (lunarDay < 0)
+//            lunarDay += 29.531;
+//        return String.format("%.2f", lunarDay);
+//    }
 
     private void setAstroDateTime() {
         date = new Date();
         astroDateTime = new AstroDateTime(Integer.valueOf(yearFormat.format(date)), Integer.valueOf(monthFormat.format(date)), Integer.valueOf(dayFormat.format(date)), Integer.valueOf(hourFormat.format(date)), Integer.valueOf(minuteFormat.format(date)), Integer.valueOf(secondsFormat.format(date)), 2, false);
-//        context = getActivity();
+//        context = getActivity();111111111
         //  SharedPreferences preferences = context.getSharedPreferences(
         //        getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        double szerokosc = Double.parseDouble(preferences.getString("szerokoscOdczytana", "0"));
-        double dlugosc = Double.parseDouble(preferences.getString("dlugoscOdczytana", "0"));
+
+        double szerokosc = Double.parseDouble(preferences.getString("szerokoscOdczytana", "51.45"));
+        double dlugosc = Double.parseDouble(preferences.getString("dlugoscOdczytana", "29.28"));
 
         location = new AstroCalculator.Location(szerokosc, dlugosc);
 
@@ -128,24 +141,19 @@ public class MoonFragment extends Fragment {
         while (true) {
             try {
                 if (getActivity() != null) {
-//                    Toast.makeText(getActivity(), "Nowe dane",
-//                            Toast.LENGTH_SHORT).show();
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
 
                             setAstroDateTime();
                             setData();
-//                        Toast.makeText(getActivity(), "Nowe dane",
-//                                Toast.LENGTH_SHORT).show();
 
                         }
 
                     });
                 }
                 Thread.sleep(minuteInMillisecconds * refreshTime);
-//                Toast.makeText(getActivity(), "Nowe dane",
-//                        Toast.LENGTH_SHORT).show();
+
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

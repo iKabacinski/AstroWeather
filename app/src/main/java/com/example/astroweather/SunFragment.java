@@ -100,8 +100,8 @@ public class SunFragment extends Fragment {
 
         //  preferences = context.getSharedPreferences(
         //       getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        double szerokosc = Double.parseDouble(preferences.getString("szerokoscOdczytana", "0"));
-        double dlugosc = Double.parseDouble(preferences.getString("dlugoscOdczytana", "0"));
+        double szerokosc = Double.parseDouble(preferences.getString("szerokoscOdczytana", "51.45"));
+        double dlugosc = Double.parseDouble(preferences.getString("dlugoscOdczytana", "19.28"));
 
         location = new AstroCalculator.Location(szerokosc, dlugosc);
 
@@ -163,5 +163,3 @@ public class SunFragment extends Fragment {
     }
 
 }
-
-

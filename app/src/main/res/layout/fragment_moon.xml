@@ -11,41 +11,48 @@
         android:layout_height="wrap_content"
         android:text="Księżyc"
         android:textAlignment="center"
+        android:textColor="@color/ksiezycNiebieski"
         android:textSize="20sp" />
 
     <TextView
         android:id="@+id/wschodKsiezycaaaa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Wschód księżyca: " />
+        android:text="Wschód księżyca: "
+        android:textColor="@color/ksiezycNiebieski" />
 
     <TextView
         android:id="@+id/zachodKsiezyca"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Zachód księżyca: " />
+        android:text="Zachód księżyca: "
+        android:textColor="@color/ksiezycNiebieski" />
 
     <TextView
         android:id="@+id/pelniaKsiezyc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Najbliższa pełnia: " />
+        android:text="Najbliższa pełnia: "
+        android:textColor="@color/ksiezycNiebieski" />
 
     <TextView
         android:id="@+id/nowKsiezyca"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Najbliższa nów: " />
+        android:text="Najbliższa nów: "
+        android:textColor="@color/ksiezycNiebieski" />
 
     <TextView
         android:id="@+id/fazaKsiezyca"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Faza księżyca: " />
+        android:text="Faza księżyca: "
+        android:textColor="@color/ksiezycNiebieski" />
 
     <TextView
         android:id="@+id/dzienMiesiacaSynodycznego"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Dzień miesiąca synodycznego: " />
+        android:text="Dzień miesiąca synodycznego: "
+        android:textColor="@color/ksiezycNiebieski" />
 </LinearLayout>

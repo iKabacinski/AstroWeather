@@ -31,8 +31,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="number|numberDecimal"
-            android:text="0" />
+            android:inputType="numberSigned|number|numberDecimal"
+            android:text="51.45" />
     </TableRow>
 
     <TableRow
@@ -59,8 +59,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="number|numberDecimal"
-            android:text="0" />
+            android:inputType="numberSigned|number|numberDecimal"
+            android:text="19.28" />
     </TableRow>
 
     <TableRow
