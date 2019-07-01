@@ -4,19 +4,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 class FragmentAdapter extends FragmentStatePagerAdapter {
 
 
-    private static int NUMBER =2;
+    private static int NUMBER = 5;
 
     public FragmentAdapter(FragmentManager fm) {
         super(fm);
     }
-
-
 
 
     @Override
@@ -26,6 +21,12 @@ class FragmentAdapter extends FragmentStatePagerAdapter {
                 return new SunFragment();
             case 1:
                 return new MoonFragment();
+            case 2:
+                return new BasicInfoWeatherFragment();
+            case 3:
+                return new AdditionalInfoWeatherFragment();
+            case 4:
+                return new ForecastWeatherFragment();
             default:
                 return null;
 

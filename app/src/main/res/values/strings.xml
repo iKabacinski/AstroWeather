@@ -13,5 +13,11 @@
         <item name="10 min">10</item>
     </string-array>
 
+    <string-array name="Temperature_array">
+        <item name="C">"Celcius"</item>
+        <item name="F">"Fahrenheit"</item>
+
+    </string-array>
+
 
 </resources>

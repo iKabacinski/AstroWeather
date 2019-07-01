@@ -20,7 +20,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         settingsButton.setOnClickListener(this);
         Button exitButton = findViewById(R.id.exitButton);
         exitButton.setOnClickListener(this);
-
+        Button settingsWeatherButton = findViewById(R.id.weatherSetting);
+        settingsWeatherButton.setOnClickListener(this);
 
 
     }
@@ -37,6 +38,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.settingsButton: {
                 Intent preferences = new Intent(this, Preferences.class);
                 startActivity(preferences);
+                break;
+            }
+            case R.id.weatherSetting: {
+                Intent weatherPref = new Intent(this, WeatherSettings.class);
+                startActivity(weatherPref);
                 break;
             }
             case R.id.exitButton: {
