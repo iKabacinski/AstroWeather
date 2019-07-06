@@ -18,6 +18,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static android.content.Context.MODE_PRIVATE;
 import static java.lang.Math.round;
 
 
@@ -45,7 +46,7 @@ public class SunFragment extends Fragment {
 
 
     private SharedPreferences preferences;
-
+    SharedPreferences weathPreferences;
     private AstroDateTime astroDateTime;
     private AstroCalculator astroCalculator;
     private AstroCalculator.Location location;
@@ -74,7 +75,9 @@ public class SunFragment extends Fragment {
 
         //context = getActivity();
         preferences = context.getSharedPreferences(
-                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+                getString(R.string.preference_file_key), MODE_PRIVATE);
+         weathPreferences = context.getSharedPreferences("SaveInformations", MODE_PRIVATE);
+
         setAstroDateTime();
         //setData();
 
@@ -100,8 +103,12 @@ public class SunFragment extends Fragment {
 
         //  preferences = context.getSharedPreferences(
         //       getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-        double szerokosc = Double.parseDouble(preferences.getString("szerokoscOdczytana", "51.45"));
-        double dlugosc = Double.parseDouble(preferences.getString("dlugoscOdczytana", "19.28"));
+
+//        weathPreferences = context.getSharedPreferences("SaveInformations", MODE_PRIVATE);
+        double dlugosc = Double.parseDouble(weathPreferences.getString("longitudeAstro", "19.28"));
+        double szerokosc = Double.parseDouble(weathPreferences.getString("latitudeAstro", "51.45"));
+      //  double szerokosc = Double.parseDouble(preferences.getString("szerokoscOdczytana", "51.45"));
+       // double dlugosc = Double.parseDouble(preferences.getString("dlugoscOdczytana", "19.28"));
 
         location = new AstroCalculator.Location(szerokosc, dlugosc);
 

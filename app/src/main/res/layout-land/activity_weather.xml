@@ -5,38 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Astro">
+    tools:context=".WeatherActivity">
 
     <TextClock
-        android:id="@+id/date"
+        android:id="@+id/textClock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="TextView"
         android:textAlignment="center"
         android:textSize="30sp"
         android:format24Hour="kk:mm:ss"
-        android:format12Hour="@null"
-        />
+        android:format12Hour="@null"/>
 
     <TextView
-        android:id="@+id/szerokoscGeograficzna"
+        android:id="@+id/CityText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Szerokość geograficzna: " />
-
-    <TextView
-        android:id="@+id/dlugośćGeograficzna"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Długość geograficzna: " />
-
-    <TextView
-        android:id="@+id/czasOdswiezania"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:text="Miasto"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
 </LinearLayout>

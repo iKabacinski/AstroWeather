@@ -5,50 +5,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Astro">
+    tools:context=".WeatherActivity">
 
     <TextClock
-        android:id="@+id/date"
+        android:id="@+id/textClock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textSize="30sp"
-        android:format24Hour="kk:mm:ss"
         android:format12Hour="@null"
-        />
+        android:format24Hour="kk:mm:ss"
+        android:text="godzina"
+        android:textAlignment="center"
+        android:textSize="30sp" />
 
     <TextView
-        android:id="@+id/szerokoscGeograficzna"
+        android:id="@+id/CityText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Szerokość geograficzna: " />
-
-    <TextView
-        android:id="@+id/dlugośćGeograficzna"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Długość geograficzna: " />
-
-    <TextView
-        android:id="@+id/czasOdswiezania"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:text="Miasto"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <fragment
-            android:id="@+id/fragment3"
-            android:name="com.example.astroweather.SunFragment"
-            android:layout_width="match_parent"
+            android:id="@+id/fragment"
+            android:name="com.example.astroweather.BasicInfoWeatherFragment"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
         <fragment
-            android:id="@+id/fragment4"
-            android:name="com.example.astroweather.MoonFragment"
-            android:layout_width="match_parent"
+            android:id="@+id/fragment2"
+            android:name="com.example.astroweather.AdditionalInfoWeatherFragment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <fragment
+            android:id="@+id/fragment5"
+            android:name="com.example.astroweather.ForecastWeatherFragment"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1" />
     </TableRow>
@@ -57,7 +57,5 @@
         android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0"
         android:visibility="invisible" />
-
 </LinearLayout>

@@ -8,37 +8,24 @@ import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
+import com.squareup.picasso.Picasso;
+
+
+import static android.content.Context.MODE_PRIVATE;
 
 
 public class BasicInfoWeatherFragment extends Fragment {
 
-    private TextView temperatureText;
-    private TextView descriptionText;
-    private TextView dateText;
+    private TextView result;
+
+    private ImageView imageView;
+
     private String unit;
     private SharedPreferences preferences;
-    private FragmentActivity context;
 
-    public BasicInfoWeatherFragment() {
-        // Required empty public constructor
-    }
-
-
-    public static BasicInfoWeatherFragment newInstance(String param1, String param2) {
-        BasicInfoWeatherFragment fragment = new BasicInfoWeatherFragment();
-        Bundle args = new Bundle();
-
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,51 +42,37 @@ public class BasicInfoWeatherFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_weather, container, false);
 
-        context = getActivity();
-        //initialize(view);
 
-        //findWeather();
-        // Inflate the layout for this fragment
+        result = view.findViewById(R.id.result);
+        imageView = view.findViewById(R.id.imageWeather);
+
+        SharedPreferences res = this.getActivity().getSharedPreferences("SaveInformations", MODE_PRIVATE);
+
+        String cName = res.getString("cityName", "London");
+
+
+        SaveToFile saveToFile = new SaveToFile();
+        String weatherDescription = saveToFile.read(cName, this.getActivity());
+        String[] lines = weatherDescription.split(System.getProperty("line.separator"));
+        String units = res.getString("unitName", "Celsius");
+        if (units.equals("Fahrenheit")) {
+
+            String temperature = lines[3].substring(lines[3].indexOf(" ") + 1, lines[3].indexOf("*"));
+            String temperature1 = temperature;
+            temperature = temperature.replace(",", ".");
+            Double temp = Double.parseDouble(temperature);
+            temp = temp + 273.15;
+            temperature = String.valueOf(temp).substring(0, String.valueOf(temp).indexOf(".") + 2) + "*F";
+            weatherDescription = weatherDescription.replace(temperature1 + "*C", temperature);
+        }
+        result.setText(weatherDescription.substring(0, weatherDescription.indexOf(lines[lines.length - 1])));
+        if(lines[lines.length-1].isEmpty()==false) {
+            Picasso.with(this.getActivity()).load(lines[lines.length - 1]).into(imageView);
+        }
+
         return view;
     }
 //
-//    private void findWeather() {
-//        double szerokosc = Double.parseDouble(preferences.getString("szerokoscOdczytana", "51.45"));
-//
-//        double dlugosc = Double.parseDouble(preferences.getString("dlugoscOdczytana", "19.28"));
-//
-//        String API_KEY = "f85019ba832469304b6d38b29275ac0b";
-//        String urlString = "api.openweathermap.org/data/2.5/weather?lat={" + szerokosc + "}&lon={" + dlugosc + "}" + "&appid=" + API_KEY;
-
-
-//        try {
-//            StringBuilder result = new StringBuilder();
-//
-//            URL url = new URL(urlString);
-//            URLConnection connection = url.openConnection();
-//            String line;
-//            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-//            while ((line = bufferedReader.readLine()) != null) {
-//                result.append(line);
-//            }
-//            bufferedReader.close();
-//
-//
-//           // Map<String,Object> tempMap = jsonToMap
-//
-//
-//        } catch (MalformedURLException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-//    private void initialize(View view) {
-//        temperatureText = view.findViewById(R.id.textTemp);
-//        dateText = view.findViewById(R.id.textDate);
-//        descriptionText = view.findViewById(R.id.textOpis);
-//    }
 
 
 }

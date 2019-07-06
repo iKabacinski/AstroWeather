@@ -18,6 +18,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static android.content.Context.MODE_PRIVATE;
 import static java.lang.Math.round;
 
 
@@ -45,6 +46,7 @@ public class MoonFragment extends Fragment {
     private Thread thread;
 
     private SharedPreferences preferences;
+    SharedPreferences weathPreferences;
 
     private AstroDateTime astroDateTime;
     private AstroCalculator astroCalculator;
@@ -74,6 +76,8 @@ public class MoonFragment extends Fragment {
         context = getActivity();
         preferences = context.getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+
+        weathPreferences = context.getSharedPreferences("SaveInformations", MODE_PRIVATE);
         setAstroDateTime();
         //setData();
 
@@ -108,12 +112,14 @@ public class MoonFragment extends Fragment {
     private void setAstroDateTime() {
         date = new Date();
         astroDateTime = new AstroDateTime(Integer.valueOf(yearFormat.format(date)), Integer.valueOf(monthFormat.format(date)), Integer.valueOf(dayFormat.format(date)), Integer.valueOf(hourFormat.format(date)), Integer.valueOf(minuteFormat.format(date)), Integer.valueOf(secondsFormat.format(date)), 2, false);
-//        context = getActivity();111111111
-        //  SharedPreferences preferences = context.getSharedPreferences(
-        //        getString(R.string.preference_file_key), Context.MODE_PRIVATE);
 
-        double szerokosc = Double.parseDouble(preferences.getString("szerokoscOdczytana", "51.45"));
-        double dlugosc = Double.parseDouble(preferences.getString("dlugoscOdczytana", "29.28"));
+
+        // weathPreferences = getActivity().getSharedPreferences("SaveInformations", MODE_PRIVATE);
+        double dlugosc = Double.parseDouble(weathPreferences.getString("longitudeAstro", "19.28"));
+        double szerokosc = Double.parseDouble(weathPreferences.getString("latitudeAstro", "51.45"));
+
+       // double szerokosc = Double.parseDouble(resWeather.getString("longitude", "51.45"));
+        //double dlugosc = Double.parseDouble(resWeather.getString("latitude", "19.28"));
 
         location = new AstroCalculator.Location(szerokosc, dlugosc);
 
@@ -122,6 +128,7 @@ public class MoonFragment extends Fragment {
         refreshTime = preferences.getInt("odswiezanieOdczytane", 1);
 
     }
+
 
     @Override
     public void onStart() {

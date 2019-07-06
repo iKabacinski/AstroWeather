@@ -1,63 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context=".BasicInfoWeatherFragment">
 
-    <TableRow
-        android:id="@+id/TempTab"
+    <TextView
+        android:id="@+id/result"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="wrap_content"
+        android:text="textview"
+        android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/Temperatura"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Temperatura" />
-
-        <TextView
-            android:id="@+id/textTemp"
-            android:layout_width="356dp"
-            android:layout_height="match_parent" />
-    </TableRow>
-
-    <TableRow
-        android:id="@+id/OpisTab"
+    <ImageView
+        android:id="@+id/imageWeather"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
-        <TextView
-            android:id="@+id/Opis"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Opis" />
-
-        <TextView
-            android:id="@+id/textOpis"
-            android:layout_width="390dp"
-            android:layout_height="wrap_content" />
-    </TableRow>
-
-    <TableRow
-        android:id="@+id/DataTab"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
-        <TextView
-            android:id="@+id/Data"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Data" />
-
-        <TextView
-            android:id="@+id/textDate"
-            android:layout_width="383dp"
-            android:layout_height="wrap_content" />
-    </TableRow>
-
+        android:layout_height="106dp"
+        tools:src="@tools:sample/backgrounds/scenic" />
 </LinearLayout>
